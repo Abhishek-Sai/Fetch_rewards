@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeId;
 import java.util.List;
 
 public class Receipt {
-    public String id;
+    private String id;
     private String retailer;
     private String purchaseDate;
     private String purchaseTime;

@@ -10,11 +10,8 @@ import java.util.List;
 @Service
 public class ReceiptService {
 
-    public Receipt processReceipt(HashMap<String, Receipt> receiptStore, String id) {
+    public Receipt processReceipt(Receipt receipt) {
         int points = 0;
-
-        Receipt receipt = receiptStore.get(id);
-
 
         points += calculatePointsForRetailer(receipt);
         points += calculatePointsForTotalAmount(receipt);

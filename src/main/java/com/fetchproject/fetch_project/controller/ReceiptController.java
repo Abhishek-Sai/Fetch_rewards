@@ -5,6 +5,7 @@ import com.fetchproject.fetch_project.model.Receipt;
 import com.fetchproject.fetch_project.model.ReceiptProcessResponse;
 import com.fetchproject.fetch_project.service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +25,16 @@ public class ReceiptController {
         String id = UUID.randomUUID().toString();
         System.out.println("The id is " + id);
         receiptStore.put(id, receipt);
-        receiptStore.put(id, receiptService.processReceipt(receiptStore, id));
+        receiptStore.put(id, receiptService.processReceipt(receiptStore.get(id)));
         return ResponseEntity.ok(new ReceiptProcessResponse(id));
     }
 
-    @GetMapping("/receipts/{id}/points")
-    public ResponseEntity<PointsResponse> getPointsById(@PathVariable String id) {
-       return ResponseEntity.ok(new PointsResponse(receiptStore.get(id).getPoints()));
+    @GetMapping(value = "/receipts/{id}/points")
+    public ResponseEntity<?> getPointsById(@PathVariable String id) {
+        Receipt receipt = receiptStore.get(id);
+        if(receipt == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PointsResponse(0));
+        }
+        return ResponseEntity.ok(new PointsResponse(receiptStore.get(id).getPoints()));
     }
 }
