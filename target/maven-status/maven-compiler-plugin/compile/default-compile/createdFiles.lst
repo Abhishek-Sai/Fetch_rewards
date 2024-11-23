@@ -1,0 +1,8 @@
+com/fetchproject/fetch_project/model/Item.class
+com/fetchproject/fetch_project/FetchProjectApplication.class
+com/fetchproject/fetch_project/service/ReceiptService.class
+com/fetchproject/fetch_project/model/Receipt.class
+com/fetchproject/fetch_project/model/PointsResponse.class
+com/fetchproject/fetch_project/controller/ReceiptController.class
+com/fetchproject/fetch_project/model/ReceiptProcessResponse.class
+com/fetchproject/fetch_project/service/ReceiptServiceImpl.class

@@ -32,10 +32,4 @@ public class ReceiptController {
     public ResponseEntity<PointsResponse> getPointsById(@PathVariable String id) {
        return ResponseEntity.ok(new PointsResponse(receiptStore.get(id).getPoints()));
     }
-
-    @GetMapping("/test")
-    public String test() {
-        return "Testing";
-    }
-
 }
