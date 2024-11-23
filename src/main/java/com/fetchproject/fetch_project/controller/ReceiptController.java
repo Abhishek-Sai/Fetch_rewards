@@ -23,14 +23,13 @@ public class ReceiptController {
     @PostMapping("/receipts/process")
     public ResponseEntity<ReceiptProcessResponse> processReceipt(@RequestBody Receipt receipt) {
         String id = UUID.randomUUID().toString();
-        System.out.println("The id is " + id);
         receiptStore.put(id, receipt);
         receiptStore.put(id, receiptService.processReceipt(receiptStore.get(id)));
         return ResponseEntity.ok(new ReceiptProcessResponse(id));
     }
 
     @GetMapping(value = "/receipts/{id}/points")
-    public ResponseEntity<?> getPointsById(@PathVariable String id) {
+    public ResponseEntity<PointsResponse> getPointsById(@PathVariable String id) {
         Receipt receipt = receiptStore.get(id);
         if(receipt == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PointsResponse(0));

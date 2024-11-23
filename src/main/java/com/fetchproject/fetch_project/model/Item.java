@@ -4,6 +4,11 @@ public class Item {
     private String shortDescription;
     private double price;
 
+    public Item(String shortDescription, double price) {
+        this.shortDescription = shortDescription;
+        this.price = price;
+    }
+
     public String getShortDescription() {
         return shortDescription;
     }
