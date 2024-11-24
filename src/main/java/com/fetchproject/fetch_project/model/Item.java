@@ -1,7 +1,13 @@
 package com.fetchproject.fetch_project.model;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 public class Item {
+    @NotNull
+    @NotEmpty
     private String shortDescription;
+    @NotNull
     private double price;
 
     public Item(String shortDescription, double price) {

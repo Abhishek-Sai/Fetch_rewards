@@ -1,13 +1,27 @@
 package com.fetchproject.fetch_project.model;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.List;
 
 public class Receipt {
     private String id;
+
+    @NotNull
+    @NotEmpty
     private String retailer;
+    @NotNull
+    @NotEmpty
     private String purchaseDate;
+    @NotNull
+    @NotEmpty
     private String purchaseTime;
+    @NotNull
     private Double total;
+    @NotNull
+    @NotEmpty
     private List<Item> items;
     private int points;
 

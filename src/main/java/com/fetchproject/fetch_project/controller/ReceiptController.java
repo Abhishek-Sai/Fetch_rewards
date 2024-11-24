@@ -4,9 +4,12 @@ import com.fetchproject.fetch_project.model.PointsResponse;
 import com.fetchproject.fetch_project.model.Receipt;
 import com.fetchproject.fetch_project.model.ReceiptProcessResponse;
 import com.fetchproject.fetch_project.service.ReceiptService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -21,7 +24,10 @@ public class ReceiptController {
     private ReceiptService receiptService;
 
     @PostMapping("/receipts/process")
-    public ResponseEntity<ReceiptProcessResponse> processReceipt(@RequestBody Receipt receipt) {
+    public ResponseEntity<?> processReceipt(@Valid @RequestBody Receipt receipt, Errors errors) {
+        if(errors.hasErrors()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The receipt is invalid");
+        }
         String id = UUID.randomUUID().toString();
         receiptStore.put(id, receipt);
         receipt.setId(id);
@@ -30,10 +36,10 @@ public class ReceiptController {
     }
 
     @GetMapping(value = "/receipts/{id}/points")
-    public ResponseEntity<PointsResponse> getPointsById(@PathVariable String id) {
+    public ResponseEntity<?> getPointsById(@PathVariable String id) {
         Receipt receipt = receiptStore.get(id);
         if(receipt == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PointsResponse(0));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No receipt found for the id " + id);
         }
         return ResponseEntity.ok(new PointsResponse(receiptStore.get(id).getPoints()));
     }

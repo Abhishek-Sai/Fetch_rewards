@@ -25,15 +25,11 @@ public class ReceiptService {
     }
 
     private int calculatePointsForRetailer(Receipt receipt) {
-        if(receipt.getRetailer()== null || receipt.getRetailer().isEmpty())
-            return 0;
         String retailerName = receipt.getRetailer();
         return retailerName.replaceAll("[^a-zA-Z0-9]", "").length();
     }
 
     private int calculatePointsForTotalAmount(Receipt receipt) {
-        if(receipt.getTotal() == null)
-            return 0;
         Double total = receipt.getTotal();
         int points = 0;
         if(total > 0.0){
@@ -48,8 +44,6 @@ public class ReceiptService {
     }
 
     private int calculatePointsForNumberOfItems(Receipt receipt) {
-        if(receipt.getItems()== null || receipt.getItems().isEmpty())
-            return 0;
         List<Item> itemsList = receipt.getItems();
         if(itemsList != null) {
             int length = (int) Math.floor((double) itemsList.size() / 2);
@@ -59,8 +53,6 @@ public class ReceiptService {
     }
 
     private int calculatePointsForLengthOfItemDesc(Receipt receipt) {
-        if(receipt.getItems()== null || receipt.getItems().isEmpty())
-            return 0;
         List<Item> itemsList = receipt.getItems();
         int points = 0;
         if(itemsList != null) {
@@ -78,8 +70,6 @@ public class ReceiptService {
     }
 
     private int calculatePointsForPurchaseDate(Receipt receipt) {
-        if(receipt.getPurchaseDate() == null || receipt.getPurchaseDate().isEmpty())
-            return 0;
         String date = receipt.getPurchaseDate();
         List<String> dateList = List.of(date.split("-"));
         /* Ideally should log as an error in date format.
@@ -92,8 +82,6 @@ public class ReceiptService {
     }
 
     private int calculatePointsForPurchaseTime(Receipt receipt) {
-        if(receipt.getPurchaseTime() == null || receipt.getPurchaseTime().isEmpty())
-            return 0;
         String purchaseTime = receipt.getPurchaseTime();
         List<String> purchaseTimeList = List.of(purchaseTime.split(":"));
         if(purchaseTimeList.size() < 2)

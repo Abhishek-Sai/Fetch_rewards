@@ -50,9 +50,157 @@ public class ReceiptControllerTest {
     }
 
     @Test
+    void testResponseNoRetailer() throws Exception {
+        Receipt receipt = new Receipt();
+        receipt.setTotal(9.00);
+        receipt.setPurchaseDate("2022-03-20");
+        receipt.setPurchaseTime("14:33");
+        receipt.setItems(Arrays.asList(
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25)
+        ));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/receipts/process")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(receipt)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testResponseEmptyRetailer() throws Exception {
+        Receipt receipt = new Receipt();
+        receipt.setRetailer("");
+        receipt.setTotal(9.00);
+        receipt.setPurchaseDate("2022-03-20");
+        receipt.setPurchaseTime("14:33");
+        receipt.setItems(Arrays.asList(
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25)
+        ));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/receipts/process")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(receipt)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testResponseNoTotal() throws Exception {
+        Receipt receipt = new Receipt();
+        receipt.setRetailer("M&M Corner Market");
+        receipt.setPurchaseDate("2022-03-20");
+        receipt.setPurchaseTime("14:33");
+        receipt.setItems(Arrays.asList(
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25)
+        ));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/receipts/process")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(receipt)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testResponseNoPurchaseDate() throws Exception {
+        Receipt receipt = new Receipt();
+        receipt.setRetailer("M&M Corner Market");
+        receipt.setTotal(9.00);
+        receipt.setPurchaseTime("14:33");
+        receipt.setItems(Arrays.asList(
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25)
+        ));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/receipts/process")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(receipt)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testResponseEmptyPurchaseDate() throws Exception {
+        Receipt receipt = new Receipt();
+        receipt.setRetailer("M&M Corner Market");
+        receipt.setTotal(9.00);
+        receipt.setPurchaseDate("");
+        receipt.setPurchaseTime("14:33");
+        receipt.setItems(Arrays.asList(
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25)
+        ));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/receipts/process")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(receipt)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testResponseNoPurchaseTime() throws Exception {
+        Receipt receipt = new Receipt();
+        receipt.setRetailer("M&M Corner Market");
+        receipt.setTotal(9.00);
+        receipt.setPurchaseDate("2022-03-20");
+        receipt.setItems(Arrays.asList(
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25)
+        ));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/receipts/process")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(receipt)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testResponseEmptyPurchaseTime() throws Exception {
+        Receipt receipt = new Receipt();
+        receipt.setRetailer("M&M Corner Market");
+        receipt.setTotal(9.00);
+        receipt.setPurchaseDate("2024-11-23");
+        receipt.setPurchaseTime("");
+        receipt.setItems(Arrays.asList(
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25),
+                new Item("Gatorade", 2.25)
+        ));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/receipts/process")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(receipt)))
+                .andExpect(status().isBadRequest());
+    }
+
+    void testResponseNoItems() throws Exception {
+        Receipt receipt = new Receipt();
+        receipt.setRetailer("M&M Corner Market");
+        receipt.setTotal(9.00);
+        receipt.setPurchaseDate("2022-03-20");
+        receipt.setPurchaseTime("14:33");
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/receipts/process")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(receipt)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     void testGetPointsByInvalidId() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/receipts/invalid-id/points"))
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.points").value(0));
+                .andExpect(status().isNotFound());
     }
 }
