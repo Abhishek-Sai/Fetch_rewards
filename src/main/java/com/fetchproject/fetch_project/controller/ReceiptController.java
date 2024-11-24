@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,8 @@ public class ReceiptController {
     @PostMapping("/receipts/process")
     public ResponseEntity<?> processReceipt(@Valid @RequestBody Receipt receipt, Errors errors) {
         if(errors.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The receipt is invalid");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The receipt is invalid. "
+            + errors.getFieldErrors().getLast().getDefaultMessage());
         }
         String id = UUID.randomUUID().toString();
         receiptStore.put(id, receipt);

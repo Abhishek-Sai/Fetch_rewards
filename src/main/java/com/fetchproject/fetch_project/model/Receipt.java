@@ -9,19 +9,19 @@ import java.util.List;
 public class Receipt {
     private String id;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "There is no retailer on the receipt.")
+    @NotEmpty(message = "The retailer name cannot be empty.")
     private String retailer;
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "There is no purchaseDate on the receipt.")
+    @NotEmpty(message = "The purchaseDate name cannot be empty.")
     private String purchaseDate;
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "There is no purchaseTime on the receipt.")
+    @NotEmpty(message = "The purchaseTime name cannot be empty.")
     private String purchaseTime;
-    @NotNull
+    @NotNull(message = "There is no total on the receipt.")
     private Double total;
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "There are no items on the receipt.")
+    @NotEmpty(message = "There are no items on the receipt.")
     private List<Item> items;
     private int points;
 
