@@ -91,5 +91,11 @@ You can use the APIs using a tool like **Postman** or **curl**.
        }
      
 ---
+## Note
 
+### Certain Assumptions
+- If all the given fields in the receipt don't exist then the receipt is not valid and a 400 status is returned along with the reason why the receipt is not valid.
+- If any of the fields of the receipt is null then the receipt is not valid and a 400 status is returned along with the reason why the receipt is not valid.
+- The purchaseTime can be in the format "hh:mm" or "h:mm" or "hh:m" or "h:m"
+- The purchaseDate can be in the format "yyyy-mm-dd" or "yyyy-m-d"
      

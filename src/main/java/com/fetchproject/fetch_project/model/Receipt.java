@@ -14,9 +14,11 @@ public class Receipt {
     private String retailer;
     @NotNull(message = "There is no purchaseDate on the receipt.")
     @NotEmpty(message = "The purchaseDate name cannot be empty.")
+    @Pattern(regexp = "^\\d{4}-\\d{1,2}-\\d{1,2}$", message = "Does not match the date format.")
     private String purchaseDate;
     @NotNull(message = "There is no purchaseTime on the receipt.")
     @NotEmpty(message = "The purchaseTime name cannot be empty.")
+    @Pattern(regexp = "^([0-9]|[01]?[0-9]|2[0-3]):([0-5]?[0-9])$", message = "Does not match the time format.")
     private String purchaseTime;
     @NotNull(message = "There is no total on the receipt.")
     private Double total;
