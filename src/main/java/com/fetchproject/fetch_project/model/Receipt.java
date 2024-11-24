@@ -1,7 +1,5 @@
 package com.fetchproject.fetch_project.model;
 
-import com.fasterxml.jackson.annotation.JsonTypeId;
-
 import java.util.List;
 
 public class Receipt {
@@ -9,7 +7,7 @@ public class Receipt {
     private String retailer;
     private String purchaseDate;
     private String purchaseTime;
-    private double total;
+    private Double total;
     private List<Item> items;
     private int points;
 
@@ -45,11 +43,11 @@ public class Receipt {
         this.purchaseTime = purchaseTime;
     }
 
-    public double getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
