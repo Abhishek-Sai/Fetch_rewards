@@ -1,9 +1,6 @@
 package com.fetchproject.fetch_project.model;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 
 import java.util.List;
 
@@ -22,6 +19,7 @@ public class Receipt {
     @Pattern(regexp = "^([0-9]|[01]?[0-9]|2[0-3]):([0-5]?[0-9])$", message = "Does not match the time format.")
     private String purchaseTime;
     @NotNull(message = "There is no total on the receipt.")
+    @Positive(message = "Total must be greater than zero.")
     private Double total;
     @NotNull(message = "There are no items on the receipt.")
     @NotEmpty(message = "There are no items on the receipt.")
