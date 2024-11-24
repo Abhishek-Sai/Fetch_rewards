@@ -24,7 +24,7 @@ I have outlined the steps to build, run and use this project below.
    
 ---
 
-### Building the Project
+### Building the Project (Optional)
 
 The **target** folder already contains the generated JAR file, so you can **SKIP** building the project unless you'd like to regenerate the package.
 
