@@ -19,8 +19,8 @@ I have outlined the steps to build, run and use this project below.
 
 1. Clone this repository to your local machine:
    ```bash
-   git clone git@github.com:Abhishek-Sai/Fetch_rewards.git
-   cd fetch-project
+   git clone https://github.com/Abhishek-Sai/Fetch_rewards.git
+   cd Fetch_rewards
    
 ---
 
