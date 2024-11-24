@@ -8,7 +8,8 @@ public class Item {
     @NotNull(message = "One of the items is missing the shortDescription field.")
     @NotEmpty(message = "One of the items has no value in shortDescription.")
     private String shortDescription;
-    @NotNull(message = "One of the items is missing the shortDescription field.")
+
+    @NotNull(message = "One of the items is missing the price field.")
     @Positive(message = "Price must be greater than zero.")
     private Double price;
 

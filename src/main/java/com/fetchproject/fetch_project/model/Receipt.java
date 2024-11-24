@@ -10,21 +10,26 @@ public class Receipt {
     @NotNull(message = "There is no retailer on the receipt.")
     @NotEmpty(message = "The retailer name cannot be empty.")
     private String retailer;
+
     @NotNull(message = "There is no purchaseDate on the receipt.")
     @NotEmpty(message = "The purchaseDate name cannot be empty.")
     @Pattern(regexp = "^\\d{4}-\\d{1,2}-\\d{1,2}$", message = "Does not match the date format.")
     private String purchaseDate;
+
     @NotNull(message = "There is no purchaseTime on the receipt.")
     @NotEmpty(message = "The purchaseTime name cannot be empty.")
     @Pattern(regexp = "^([0-9]|[01]?[0-9]|2[0-3]):([0-5]?[0-9])$", message = "Does not match the time format.")
     private String purchaseTime;
+
     @NotNull(message = "There is no total on the receipt.")
     @Positive(message = "Total must be greater than zero.")
     private Double total;
+
     @NotNull(message = "There are no items on the receipt.")
     @NotEmpty(message = "There are no items on the receipt.")
     @Valid
     private List<Item> items;
+
     private int points;
 
     public String getId() {

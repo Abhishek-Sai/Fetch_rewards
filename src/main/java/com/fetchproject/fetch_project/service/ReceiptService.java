@@ -32,11 +32,11 @@ public class ReceiptService {
     private int calculatePointsForTotalAmount(Receipt receipt) {
         Double total = receipt.getTotal();
         int points = 0;
-        if(total > 0.0){
-            if(total == Math.floor(total)) {
+        if (total > 0.0){
+            if (total == Math.floor(total)) {
                 points += 50;
             }
-            if(total % 0.25 == 0) {
+            if (total % 0.25 == 0) {
                 points += 25;
             }
         }
@@ -45,7 +45,7 @@ public class ReceiptService {
 
     private int calculatePointsForNumberOfItems(Receipt receipt) {
         List<Item> itemsList = receipt.getItems();
-        if(itemsList != null) {
+        if (itemsList != null) {
             int length = (int) Math.floor((double) itemsList.size() / 2);
             return length * 5;
         }
@@ -55,9 +55,9 @@ public class ReceiptService {
     private int calculatePointsForLengthOfItemDesc(Receipt receipt) {
         List<Item> itemsList = receipt.getItems();
         int points = 0;
-        if(itemsList != null) {
-            for(Item item: itemsList) {
-                if(!(item.getShortDescription() == null || item.getShortDescription().isEmpty())) {
+        if (itemsList != null) {
+            for (Item item: itemsList) {
+                if (!(item.getShortDescription() == null || item.getShortDescription().isEmpty())) {
                     String shortDescription = item.getShortDescription().trim();
                     if (shortDescription.length() % 3 == 0) {
                         double price = item.getPrice();
@@ -72,22 +72,16 @@ public class ReceiptService {
     private int calculatePointsForPurchaseDate(Receipt receipt) {
         String date = receipt.getPurchaseDate();
         List<String> dateList = List.of(date.split("-"));
-        /* Ideally should log as an error in date format.
-        For the purpose of this assignment returning as zero. */
-        if(dateList.size() < 3)
-            return 0;
         int day = Integer.parseInt(dateList.get(2));
-        if(day % 2 != 0) return 6;
+        if (day % 2 != 0) return 6;
         return 0;
     }
 
     private int calculatePointsForPurchaseTime(Receipt receipt) {
         String purchaseTime = receipt.getPurchaseTime();
         List<String> purchaseTimeList = List.of(purchaseTime.split(":"));
-        if(purchaseTimeList.size() < 2)
-            return 0;
         int purchaseHour = Integer.parseInt(purchaseTimeList.getFirst());
-        if(purchaseHour >= 14 && purchaseHour <= 16) {
+        if (purchaseHour >= 14 && purchaseHour <= 16) {
             return 10;
         }
         return 0;

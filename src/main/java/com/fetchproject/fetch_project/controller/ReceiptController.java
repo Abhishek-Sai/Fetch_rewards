@@ -26,7 +26,7 @@ public class ReceiptController {
 
     @PostMapping("/receipts/process")
     public ResponseEntity<?> processReceipt(@Valid @RequestBody Receipt receipt, Errors errors) {
-        if(errors.hasErrors()) {
+        if (errors.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The receipt is invalid. "
             + errors.getFieldErrors().getLast().getDefaultMessage());
         }
@@ -40,7 +40,7 @@ public class ReceiptController {
     @GetMapping(value = "/receipts/{id}/points")
     public ResponseEntity<?> getPointsById(@PathVariable String id) {
         Receipt receipt = receiptStore.get(id);
-        if(receipt == null) {
+        if (receipt == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No receipt found for the id " + id);
         }
         return ResponseEntity.ok(new PointsResponse(receiptStore.get(id).getPoints()));
