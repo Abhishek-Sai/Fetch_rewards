@@ -1,1 +1,3 @@
 com/fetchproject/fetch_project/FetchProjectApplicationTests.class
+com/fetchproject/fetch_project/controller/ReceiptControllerTest.class
+com/fetchproject/fetch_project/service/ReportServiceTest.class

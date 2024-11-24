@@ -24,6 +24,7 @@ public class ReceiptController {
     public ResponseEntity<ReceiptProcessResponse> processReceipt(@RequestBody Receipt receipt) {
         String id = UUID.randomUUID().toString();
         receiptStore.put(id, receipt);
+        receipt.setId(id);
         receiptStore.put(id, receiptService.processReceipt(receiptStore.get(id)));
         return ResponseEntity.ok(new ReceiptProcessResponse(id));
     }
