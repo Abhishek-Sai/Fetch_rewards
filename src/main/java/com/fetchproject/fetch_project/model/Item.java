@@ -2,13 +2,15 @@ package com.fetchproject.fetch_project.model;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class Item {
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "One of the items is missing the shortDescription field.")
+    @NotEmpty(message = "One of the items has no value in shortDescription.")
     private String shortDescription;
-    @NotNull
-    private double price;
+    @NotNull(message = "One of the items is missing the shortDescription field.")
+    @Positive(message = "Price must be greater than zero.")
+    private Double price;
 
     public Item(String shortDescription, double price) {
         this.shortDescription = shortDescription;
@@ -23,11 +25,11 @@ public class Item {
         this.shortDescription = shortDescription;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 }

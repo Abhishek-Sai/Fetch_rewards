@@ -1,4 +1,5 @@
 package com.fetchproject.fetch_project.model;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -24,6 +25,7 @@ public class Receipt {
     private Double total;
     @NotNull(message = "There are no items on the receipt.")
     @NotEmpty(message = "There are no items on the receipt.")
+    @Valid
     private List<Item> items;
     private int points;
 
